@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useMyContext } from "../../context/useContext";
 import { useContext } from "react";
-import {NavegationLink} from '../NavegationLink/index';
+import { NavegationLink } from "../NavegationLink/index";
 
 export const NavBar = () => {
   const { isGaming, setIsGaming } = useContext(useMyContext);
