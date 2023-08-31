@@ -5,7 +5,7 @@ export const useMyContext = createContext<MyContextProps>({} as MyContextProps);
 
 const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
   const [isGaming, setIsGaming] = useState(false);
-
+  console.log(isGaming)
   return (
     <useMyContext.Provider value={{ isGaming, setIsGaming }}>
       {children}
