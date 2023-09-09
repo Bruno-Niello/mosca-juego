@@ -37,10 +37,27 @@ const randomNumberToPickCards = (deck: Decks): number => {
 
 
 export const generateHand = (numberOfCards: number): SingleCardType[] => {
-    const hand = []
-    for (let i = 0; i < numberOfCards; i++) {
+    const hand = [];
+    const selectedCards = new Set<string>();
+
+    while (hand.length < numberOfCards) {
+        const randomPalo = getRandomPalo();
         const randomCardNumber = randomNumberToPickCards("spanish");
-        hand.push(HandSchema[getRandomPalo() as keyof CardTypos][randomCardNumber]);
+        const pickedCard = HandSchema[randomPalo as keyof CardTypos][randomCardNumber];
+
+        // creating a new ID for each card 
+        const cardKey = `${pickedCard.type}-${pickedCard.number}`;
+
+        // Checking if the ID already exist
+        if (!selectedCards.has(cardKey)) {
+            selectedCards.add(cardKey);
+            hand.push({
+                ...pickedCard,
+                type: randomPalo,
+                name: `${pickedCard.number} de ${randomPalo}`,
+            });
+        }
     }
-    return hand.filter(card => card !== undefined);
+
+    return hand;
 }
